@@ -1,0 +1,41 @@
+{
+    "name": "strange-image-api",
+    "version": "1.0.0",
+    "description": "Image Manipulation/Generation API",
+    "main": "dist/src/server.js",
+    "scripts": {
+        "start": "node .",
+        "start:dev": "nodemon --watch \"src/**\" --ext \"ts,json\" --ignore \"src/**/*.spec.ts\" --exec \"ts-node src/server.ts\"",
+        "build": "tsc"
+    },
+    "author": "Sai Teja M",
+    "license": "ISC",
+    "dependencies": {
+        "canvacord": "^5.4.7",
+        "cors": "^2.8.5",
+        "discord-image-generation": "^1.4.14",
+        "express": "^4.18.1",
+        "helmet": "^6.0.0",
+        "swagger-jsdoc": "^6.2.5",
+        "swagger-ui-express": "^4.5.0"
+    },
+    "devDependencies": {
+        "@types/cors": "^2.8.12",
+        "@types/express": "^4.17.14",
+        "@types/node": "^18.7.18",
+        "@types/swagger-jsdoc": "^6.0.1",
+        "@types/swagger-ui-express": "^4.1.3",
+        "nodemon": "^2.0.20",
+        "ts-node": "^10.9.1",
+        "typescript": "^4.8.3"
+    },
+    "keywords": [
+        "api",
+        "canvas",
+        "canvacord",
+        "image-api",
+        "image-manipulation",
+        "image-generation",
+        "discord-bot"
+    ]
+}

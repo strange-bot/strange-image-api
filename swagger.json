@@ -1,0 +1,45 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Strange API",
+        "description": "Image manipulation made easy",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "externalDocs": {
+        "description": "Join us at our discord",
+        "url": "https://discord.gg/TVf27uxvS2"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8081/api",
+            "description": "Development"
+        }
+    ],
+    "tags": [
+        {
+            "name": "Filters",
+            "description": "Apply various filters to images"
+        },
+        {
+            "name": "Generators",
+            "description": "Various image generators"
+        },
+        {
+            "name": "Gifs",
+            "description": "Various gif generators"
+        },
+        {
+            "name": "Overlays",
+            "description": "Various image overlays"
+        },
+        {
+            "name": "Utils",
+            "description": "Various image utilities"
+        }
+    ],
+    "produces": ["image/png"]
+}
