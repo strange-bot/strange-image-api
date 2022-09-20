@@ -1,9 +1,15 @@
 import express from "express";
 import { Controller } from "../typings";
+import config from "../config";
 
 // middlewares
 import helmet from "helmet";
 import cors from "cors";
+import rateLimit from "express-rate-limit";
+
+// custom middlewares
+import errorMiddleware from "./middlewares/error.middleware";
+import logMiddleware from "./middlewares/log.middleware";
 
 export default class App {
     public app: express.Application;
@@ -12,6 +18,7 @@ export default class App {
         this.app = express();
         this.initializeMiddlewares();
         this.initializeControllers(controllers);
+        this.initializeErrorHandling();
     }
 
     public listen(port: number): void {
@@ -29,6 +36,27 @@ export default class App {
         this.app.use(express.urlencoded({ extended: true }));
         this.app.use(cors());
         this.app.use(helmet());
+        this.app.use(
+            "/api/",
+            rateLimit({
+                windowMs: 5000, // 1 second
+                max: 5, // limit each IP to 5 requests per second
+                statusCode: 429, // status code 429
+                message: {
+                    success: false,
+                    code: 429,
+                    message: "429 To Many Requests! Please try again later.",
+                },
+                legacyHeaders: true,
+            })
+        );
+        if (config.LOGGING) {
+            this.app.use(logMiddleware);
+        }
+    }
+
+    private initializeErrorHandling() {
+        this.app.use(errorMiddleware);
     }
 
     private initializeControllers(controllers: Controller[]): void {

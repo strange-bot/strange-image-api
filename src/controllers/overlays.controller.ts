@@ -2,6 +2,7 @@ import { Router } from "express";
 import { join } from "path";
 import { readdirSync } from "fs";
 import { Controller } from "../../typings";
+import authMiddleware from "../middlewares/auth.middleware";
 
 export default class OverlaysController implements Controller {
     public path: string;
@@ -18,7 +19,7 @@ export default class OverlaysController implements Controller {
         for (const endpoint of routesDir) {
             let file = require(`../routes/overlays/${endpoint}`);
             if (file.default) file = file.default;
-            this.router.get(`${this.path}/${endpoint.split(".")[0]}`, file);
+            this.router.get(`${this.path}/${endpoint.split(".")[0]}`, authMiddleware, file);
         }
     }
 }
