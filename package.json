@@ -12,6 +12,8 @@
     "license": "ISC",
     "dependencies": {
         "canvacord": "^5.4.7",
+        "canvas": "^2.10.1",
+        "canvas-constructor": "^4.1.0",
         "cors": "^2.8.5",
         "discord-image-generation": "^1.4.14",
         "dotenv": "^16.0.2",

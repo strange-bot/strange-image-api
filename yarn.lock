@@ -725,6 +725,11 @@ canvacord@^5.4.7:
     moment-duration-format "^2.3.2"
     node-fetch "2.6.7"
 
+canvas-constructor@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/canvas-constructor/-/canvas-constructor-4.1.0.tgz#450d06956fad557daede3ca36c5f42dc93916082"
+  integrity sha512-IWZ80DeKIODMnZS1ygaalM7AYaa02KeTnMzMmLhuUK/K1p+pmetMPu6ab9DAT7HsmC9H/xHMn/oSH0K/EnEbYQ==
+
 canvas@^2.10.1, canvas@^2.2.0:
   version "2.10.1"
   resolved "https://registry.yarnpkg.com/canvas/-/canvas-2.10.1.tgz#fbfd4b1b3b106c3454481d79d363ebadf8811c08"
