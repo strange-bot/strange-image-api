@@ -1,6 +1,5 @@
 import express from "express";
 import { Controller } from "../typings";
-import config from "../config";
 
 // middlewares
 import helmet from "helmet";
@@ -21,7 +20,7 @@ export default class App {
         this.initializeErrorHandling();
     }
 
-    public listen(port: number): void {
+    public listen(port: string): void {
         this.app.listen(port, () => {
             console.log(`App listening on the port ${port}`);
         });
@@ -50,7 +49,7 @@ export default class App {
                 legacyHeaders: true,
             })
         );
-        if (config.LOGGING) {
+        if (process.env.LOGGING === "TRUE") {
             this.app.use(logMiddleware);
         }
     }

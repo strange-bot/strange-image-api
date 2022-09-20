@@ -1,4 +1,8 @@
-import config from "../config";
+// load and validate environment variables
+import "dotenv/config";
+import validateEnv from "./utils/validateEnv";
+validateEnv();
+
 import App from "./app";
 
 // controllers
@@ -14,4 +18,4 @@ const app = new App([
     new OverlaysController("/api/overlays"),
 ]);
 
-app.listen(config.PORT);
+app.listen(process.env.PORT as string);
