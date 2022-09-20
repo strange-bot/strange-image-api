@@ -38,7 +38,7 @@ export default class App {
         this.app.use(
             "/api/",
             rateLimit({
-                windowMs: 5000, // 1 second
+                windowMs: 5000, // 5 seconds
                 max: 5, // limit each IP to 5 requests per second
                 statusCode: 429, // status code 429
                 message: {
@@ -46,6 +46,7 @@ export default class App {
                     code: 429,
                     message: "429 To Many Requests! Please try again later.",
                 },
+                standardHeaders: true,
                 legacyHeaders: true,
             })
         );
