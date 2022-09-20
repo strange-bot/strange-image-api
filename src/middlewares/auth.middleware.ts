@@ -1,9 +1,8 @@
 import { Request, Response, NextFunction } from "express";
-import config from "../../config";
 import ResponseUtil from "../utils/ResponseUtil";
 
 export default async function authMiddleware(req: Request, res: Response, next: NextFunction) {
-    if (!config.AUTH) return next();
+    if (!Boolean(process.env.AUTH)) return next();
 
     try {
         // get apiKey

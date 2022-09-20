@@ -49,9 +49,7 @@ export default class App {
                 legacyHeaders: true,
             })
         );
-        if (process.env.LOGGING === "TRUE") {
-            this.app.use(logMiddleware);
-        }
+        if (Boolean(process.env.LOGGING)) this.app.use(logMiddleware);
     }
 
     private initializeErrorHandling() {
