@@ -17,7 +17,7 @@ export default class DocsController implements Controller {
     private initializeRoutes(): void {
         const swaggerSpec = swaggerJsdoc({
             definition: swaggerDocument,
-            apis: ["src/routes/**/*.js", "src/routes/**/*.ts"],
+            apis: ["dist/src/routes/**/*.js", "src/routes/**/*.ts"],
         });
 
         this.router.get(`${this.path}.json`, (_req, res) => {
