@@ -8,7 +8,6 @@ import rateLimit from "express-rate-limit";
 
 // custom middlewares
 import errorMiddleware from "./middlewares/error.middleware";
-import logMiddleware from "./middlewares/log.middleware";
 
 export default class App {
     public app: express.Application;
@@ -34,7 +33,15 @@ export default class App {
         this.app.use(express.json());
         this.app.use(express.urlencoded({ extended: true }));
         this.app.use(cors());
-        this.app.use(helmet());
+        this.app.use(
+            helmet({
+                contentSecurityPolicy: {
+                    directives: {
+                        "img-src": null, // swagger-ui response doesn't work with "img-src 'self' data:"
+                    },
+                },
+            })
+        );
         this.app.use(
             "/api/",
             rateLimit({
@@ -50,7 +57,6 @@ export default class App {
                 legacyHeaders: true,
             })
         );
-        if (Boolean(process.env.LOGGING)) this.app.use(logMiddleware);
     }
 
     private initializeErrorHandling() {

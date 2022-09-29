@@ -32,7 +32,7 @@ import { Canvacord } from "canvacord";
 export default async (req: Request, res: Response): Promise<any> => {
     try {
         const { image, pixels } = req.query;
-        if (!image) return ResponseUtil.missingParams(res, "image");
+        if (!image || !pixels) return ResponseUtil.missingParams(res, "image", "pixels");
         if (isNaN(Number(pixels))) return ResponseUtil.badRequest(res, "pixels must be a number");
         const buffer = await Canvacord.pixelate(image as string, Number(pixels));
         return ResponseUtil.success(res, buffer);

@@ -10,14 +10,14 @@ import ResponseUtil from "../../utils/ResponseUtil";
  *     tags: [Generators]
  *     parameters:
  *       - in: query
- *         name: baseImage
- *         description: The 1st image URL
+ *         name: image1
+ *         description: The base image URL
  *         required: true
  *         schema:
  *           type: string
  *       - in: query
- *         name: overlayImage
- *         description: The 2nt image URL
+ *         name: image2
+ *         description: The overlay image URL
  *         required: true
  *         schema:
  *           type: string
@@ -31,13 +31,13 @@ import ResponseUtil from "../../utils/ResponseUtil";
 
 export default async (req: Request, res: Response): Promise<any> => {
     try {
-        const { baseImage, overlayImage } = req.query;
-        if (!baseImage || !overlayImage) {
-            return ResponseUtil.missingParams(res, "baseImage", "overlayImage");
+        const { image1, image2 } = req.query;
+        if (!image1 || !image2) {
+            return ResponseUtil.missingParams(res, "image1", "image2");
         }
 
-        const baseAvatar = await loadImage(baseImage as string);
-        const overlayAvatar = await loadImage(overlayImage as string);
+        const baseAvatar = await loadImage(image1 as string);
+        const overlayAvatar = await loadImage(image2 as string);
         const canvas = createCanvas(baseAvatar.width, baseAvatar.height);
         const ctx = canvas.getContext("2d");
         ctx.globalAlpha = 0.5;
