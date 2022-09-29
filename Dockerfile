@@ -15,8 +15,7 @@ COPY dist ./dist
 
 # Environment variables
 ENV PORT=3000
-ENV AUTHENTICATION=false
-ENV LOGGING=false
+ENV AUTHENTICATION=0
 
 # Expose port
 EXPOSE 3000

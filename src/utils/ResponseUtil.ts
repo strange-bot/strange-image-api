@@ -9,11 +9,11 @@ export default class ResponseUtil {
         return res.status(200).send(buffer);
     }
 
-    static unauthorized(res: Response) {
+    static unauthorized(res: Response, isInvalid: boolean = false) {
         return res.status(401).json({
             success: false,
             code: 401,
-            message: "401 Unauthorized, Missing the API Key",
+            message: `401 Unauthorized, ${isInvalid ? "Invalid" : "Missing"} API Key.`,
         });
     }
 

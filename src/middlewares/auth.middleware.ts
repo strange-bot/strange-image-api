@@ -1,8 +1,9 @@
 import { Request, Response, NextFunction } from "express";
+import User from "../schemas/User";
 import ResponseUtil from "../utils/ResponseUtil";
 
 export default async function authMiddleware(req: Request, res: Response, next: NextFunction) {
-    if (!Boolean(process.env.AUTH)) return next();
+    if (process.env.AUTHENTICATION !== "1") return next();
 
     try {
         // get apiKey
@@ -17,7 +18,16 @@ export default async function authMiddleware(req: Request, res: Response, next: 
         // missing apiKey
         if (!apiKey) return ResponseUtil.unauthorized(res);
 
-        // TODO: validate apiKey
+        // validate apiKey
+        const [encodedId, token] = apiKey.split(".");
+        if (!encodedId || !token) return ResponseUtil.unauthorized(res, true);
+
+        const id = Buffer.from(encodedId, "base64").toString();
+        const user = User.get(id);
+        if (!user) return ResponseUtil.unauthorized(res, true);
+        if (user.token !== token) return ResponseUtil.unauthorized(res, true);
+
+        return next();
 
         // TODO: increment usage
 
