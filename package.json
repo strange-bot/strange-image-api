@@ -16,6 +16,7 @@
         "canvas-constructor": "^4.1.0",
         "cors": "^2.8.5",
         "discord-image-generation": "^1.4.14",
+        "discord.js": "^14.5.0",
         "dotenv": "^16.0.2",
         "express": "^4.18.1",
         "express-rate-limit": "^6.6.0",

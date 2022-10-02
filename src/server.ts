@@ -4,6 +4,7 @@ import validateEnv from "./utils/validateEnv";
 validateEnv();
 
 import App from "./app";
+import DiscordBot from "./bot";
 
 // controllers
 import DocsController from "./controllers/docs.controller";
@@ -23,6 +24,7 @@ const app = new App([
 
 async function init() {
     if (process.env.AUTHENTICATION === "1") await User.init();
+    if (process.env.DISCORD_TOKEN) await new DiscordBot().init();
     app.listen(process.env.PORT as string);
 }
 
