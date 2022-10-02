@@ -46,7 +46,7 @@ export default class App {
             "/api/",
             rateLimit({
                 windowMs: 5000, // 5 seconds
-                max: 5, // limit each IP to 5 requests per second
+                max: 10, // limit each IP to 5 requests per second
                 statusCode: 429, // status code 429
                 message: {
                     success: false,

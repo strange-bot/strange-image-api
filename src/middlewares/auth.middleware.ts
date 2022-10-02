@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express";
+import UsageLogs from "../schemas/UsageLogs";
 import User from "../schemas/User";
 import ResponseUtil from "../utils/ResponseUtil";
 
@@ -27,9 +28,21 @@ export default async function authMiddleware(req: Request, res: Response, next: 
         if (!user) return ResponseUtil.unauthorized(res, true);
         if (user.token !== token) return ResponseUtil.unauthorized(res, true);
 
-        return next();
-
-        // TODO: increment usage
+        // log request
+        UsageLogs.add({
+            user_id: user._id.toString(),
+            ip: req.ip,
+            method: req.method,
+            endpoint: req.path,
+            headers: Object.fromEntries(
+                Object.entries(req.headers).filter(([key]) => key !== "authorization") // removing authorization header
+            ),
+            query_params: req.query,
+            rateLimit: {
+                limit: req.rateLimit.limit,
+                current: req.rateLimit.current,
+            },
+        }).catch(() => {});
 
         return next();
     } catch (error) {
