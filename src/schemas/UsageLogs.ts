@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 const logSchema = new mongoose.Schema(
     {
         user_id: { type: String, required: true },
+        hostname: { type: String, required: true },
         ip: { type: String, required: true },
         method: { type: String, required: true },
         endpoint: { type: String, required: true },
