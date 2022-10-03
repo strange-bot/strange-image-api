@@ -10,7 +10,7 @@ import rateLimit from "express-rate-limit";
 import errorMiddleware from "./middlewares/error.middleware";
 
 export default class App {
-    public app: express.Application;
+    private app: express.Application;
 
     constructor(controllers: Controller[]) {
         this.app = express();
@@ -51,6 +51,10 @@ export default class App {
                 },
                 standardHeaders: true,
                 legacyHeaders: true,
+                keyGenerator: (req, _res) =>
+                    ((req.headers["cf-connecting-ip"] || req.headers["x-forwarded-for"] || req.socket.remoteAddress || req.ip) as string)
+                        .split(",")[0]
+                        .trim(),
             })
         );
     }
