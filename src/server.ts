@@ -8,6 +8,7 @@ import DiscordBot from "./bot";
 
 // controllers
 import DocsController from "./controllers/docs.controller";
+import DebugController from "./controllers/debug.controller";
 import FilterController from "./controllers/filters.controller";
 import GeneratorsController from "./controllers/generators.controller";
 import OverlaysController from "./controllers/overlays.controller";
@@ -16,6 +17,7 @@ import User from "./schemas/User";
 
 const app = new App([
     new DocsController("/docs"),
+    new DebugController(""),
     new FilterController("/api/filters"),
     new GeneratorsController("/api/generators"),
     new OverlaysController("/api/overlays"),
