@@ -24,6 +24,12 @@ export default class DocsController implements Controller {
             return res.json(swaggerSpec);
         });
 
-        this.router.use(this.path, swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+        this.router.use(
+            this.path,
+            swaggerUi.serve,
+            swaggerUi.setup(swaggerSpec, {
+                customSiteTitle: "Strange API - Docs",
+            })
+        );
     }
 }

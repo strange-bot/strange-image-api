@@ -29,3 +29,6 @@ async function init() {
 }
 
 init();
+
+// log unhandled rejections
+process.on("unhandledRejection", (err) => console.log(err));

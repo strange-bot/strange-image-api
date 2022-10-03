@@ -35,18 +35,14 @@ export default class App {
         this.app.use(cors());
         this.app.use(
             helmet({
-                contentSecurityPolicy: {
-                    directives: {
-                        "img-src": null, // swagger-ui response doesn't work with "img-src 'self' data:"
-                    },
-                },
+                contentSecurityPolicy: false, // swagger-ui
             })
         );
         this.app.use(
             "/api/",
             rateLimit({
-                windowMs: 5000, // 5 seconds
-                max: 10, // limit each IP to 5 requests per second
+                windowMs: 1000, // 1 second
+                max: 5, // limit each IP to 5 requests per second
                 statusCode: 429, // status code 429
                 message: {
                     success: false,
@@ -61,6 +57,13 @@ export default class App {
 
     private initializeErrorHandling() {
         this.app.use(errorMiddleware);
+        this.app.use("*", (_req, res) => {
+            res.status(404).send({
+                success: false,
+                code: 404,
+                message: "404 Not Found. Visit /docs for more information",
+            });
+        });
     }
 
     private initializeControllers(controllers: Controller[]): void {

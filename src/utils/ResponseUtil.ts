@@ -21,7 +21,7 @@ export default class ResponseUtil {
         return res.status(400).json({
             success: false,
             code: 400,
-            message: "400 Bad Request, Missing the following query parameters: " + args.join(", "),
+            message: "400 Bad Request, Missing one or more of the following query parameters: " + args.join(", "),
         });
     }
 
@@ -37,7 +37,7 @@ export default class ResponseUtil {
         return res.status(413).json({
             success: false,
             code: 413,
-            message: "413 Payload Too Large. the resulting image was too large!",
+            message: "413 Payload Too Large, The resulting image was too large!",
         });
     }
 
@@ -46,7 +46,7 @@ export default class ResponseUtil {
         return res.status(500).json({
             success: false,
             code: 500,
-            message: "500 internal Error, Something was error on our side and this should not happen! please try again later.",
+            message: "500 Internal Error, Something was error on our side and this should not happen! Please try again later.",
         });
     }
 }

@@ -41,10 +41,10 @@ export default async function authMiddleware(req: Request, res: Response, next: 
             endpoint: req.path,
             headers: Object.fromEntries(
                 Object.entries(req.headers).filter(([key]) =>
-                    ["cf-connecting-ip", "cf-ipcountry", "cf-ray", "user-agent", "x-forwarded-for", "x-real-ip"].includes(key)
+                    ["cf-connecting-ip", "cf-ipcountry", "cf-ray", "user-agent", "x-forwarded-for", "x-real-ip"].includes(key) // only log these headers
                 )
             ),
-            query_params: Object.fromEntries(Object.entries(req.query).filter(([key]) => !["apiKey"].includes(key))),
+            query_params: Object.fromEntries(Object.entries(req.query).filter(([key]) => !["apiKey"].includes(key))), // filter apiKey
             rateLimit: {
                 limit: req.rateLimit.limit,
                 current: req.rateLimit.current,
