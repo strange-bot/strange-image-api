@@ -32,6 +32,9 @@ export default async function authMiddleware(req: Request, res: Response, next: 
             .split(",")[0]
             .trim();
 
+        // skip logging localhost
+        if (req.hostname.includes("localhost")) return next();
+
         // log request
         UsageLogs.add({
             user_id: user._id.toString(),
@@ -40,8 +43,8 @@ export default async function authMiddleware(req: Request, res: Response, next: 
             method: req.method,
             endpoint: req.path,
             headers: Object.fromEntries(
-                Object.entries(req.headers).filter(([key]) =>
-                    ["cf-connecting-ip", "cf-ipcountry", "cf-ray", "user-agent", "x-forwarded-for", "x-real-ip"].includes(key) // only log these headers
+                Object.entries(req.headers).filter(
+                    ([key]) => ["cf-connecting-ip", "cf-ipcountry", "cf-ray", "user-agent", "x-forwarded-for", "x-real-ip"].includes(key) // only log these headers
                 )
             ),
             query_params: Object.fromEntries(Object.entries(req.query).filter(([key]) => !["apiKey"].includes(key))), // filter apiKey

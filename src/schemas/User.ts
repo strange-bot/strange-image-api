@@ -79,4 +79,8 @@ export default {
             }
         }
     },
+
+    getCacheSize(): number {
+        return cache.size;
+    },
 };

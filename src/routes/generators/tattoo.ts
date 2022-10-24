@@ -4,7 +4,7 @@ import ResponseUtil from "../../utils/ResponseUtil";
 
 /**
  * @swagger
- * /generators/tatoo:
+ * /generators/tattoo:
  *   get:
  *     summary: Generates a tatoo image
  *     tags: [Generators]

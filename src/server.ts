@@ -17,7 +17,7 @@ import User from "./schemas/User";
 
 const app = new App([
     new DocsController("/docs"),
-    new DebugController(""),
+    new DebugController("/api/debug"),
     new FilterController("/api/filters"),
     new GeneratorsController("/api/generators"),
     new OverlaysController("/api/overlays"),

@@ -2,6 +2,7 @@ import { Client } from "discord.js";
 import { readdirSync } from "fs";
 import { join } from "path";
 import { Command } from "../../typings";
+import updatePresence from "./helpers/updatePresence";
 
 export default class BotClient extends Client {
     public commands: Map<string, Command>;
@@ -22,6 +23,7 @@ export default class BotClient extends Client {
             if (this.user) {
                 console.log(`Logged in as ${this.user.tag}!`);
                 await this.registerCommands();
+                updatePresence(this);
             }
         });
 
