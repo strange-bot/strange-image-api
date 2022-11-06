@@ -15,7 +15,7 @@
     },
     "servers": [
         {
-            "url": "https://beta-api.strangebot.xyz/api",
+            "url": "https://strangeapi.fun/api",
             "description": "Production"
         }
     ],
