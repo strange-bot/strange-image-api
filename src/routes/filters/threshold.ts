@@ -32,7 +32,7 @@ import { Canvacord } from "canvacord";
 export default async (req: Request, res: Response): Promise<any> => {
     try {
         const { image, amount } = req.query;
-        if (!image || !amount) return ResponseUtil.missingParams(res, "image");
+        if (!image || !amount) return ResponseUtil.missingParams(res, "image", "amount");
         if (isNaN(Number(amount))) return ResponseUtil.badRequest(res, "amount must be a number");
         const buffer = await Canvacord.threshold(image as string, Number(amount));
         return ResponseUtil.success(res, buffer);

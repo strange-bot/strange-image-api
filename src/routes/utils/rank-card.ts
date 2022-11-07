@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { Rank } from "canvacord";
 import ResponseUtil from "../../utils/ResponseUtil";
 
-type status = "online" | "idle" | "dnd" | "offline" | "streaming";
+type status = "dnd" | "idle" | "offline" | "online" | "streaming";
 
 /**
  * @swagger
@@ -88,24 +88,24 @@ type status = "online" | "idle" | "dnd" | "offline" | "streaming";
 export default async (req: Request, res: Response): Promise<any> => {
     try {
         const avatar = req.query.avatar || "https://cdn.discordapp.com/embed/avatars/0.png";
-        const currentxp = req.query.currentxp || 0;
-        const reqXp = req.query.reqxp || 100;
-        const level = req.query.level || 1;
-        const rank = req.query.rank;
+        const currentxp = parseInt(req.query.currentxp as string) || 0;
+        const reqXp = parseInt(req.query.reqxp as string) || 100;
+        const level = parseInt(req.query.level as string) || 1;
+        const rank = parseInt(req.query.rank as string);
         const status = req.query.status || "idle"; // dnd || idle || offline || online || streaming
         const name = req.query.name || "Discord User";
         const discriminator = req.query.discriminator || "0000";
         const barcolor = req.query.barcolor || "#FFFFFF";
 
         // validate number inputs
-        if (isNaN(Number(currentxp))) return ResponseUtil.badRequest(res, "currentxp must be a number");
-        if (isNaN(Number(reqXp))) return ResponseUtil.badRequest(res, "reqxp must be a number");
-        if (isNaN(Number(level))) return ResponseUtil.badRequest(res, "level must be a number");
-        if (rank && isNaN(Number(rank))) return ResponseUtil.badRequest(res, "rank must be a number");
+        if (isNaN(currentxp)) return ResponseUtil.badRequest(res, "currentxp must be a number");
+        if (isNaN(reqXp)) return ResponseUtil.badRequest(res, "reqxp must be a number");
+        if (isNaN(level)) return ResponseUtil.badRequest(res, "level must be a number");
+        if (isNaN(rank)) return ResponseUtil.badRequest(res, "rank must be a number");
 
         // check status
-        if (!["online", "idle", "offline", "online", "streaming"].includes(status as string)) {
-            return ResponseUtil.badRequest(res, "status must be online, idle, dnd, offline, or streaming");
+        if (!["dnd", "idle", "offline", "online", "streaming"].includes(status as string)) {
+            return ResponseUtil.badRequest(res, "status must be dnd, idle, offline, online or streaming");
         }
 
         const bgImage = req.query.bgImage;
@@ -113,9 +113,9 @@ export default async (req: Request, res: Response): Promise<any> => {
 
         const card = new Rank()
             .setAvatar(avatar as string)
-            .setCurrentXP(currentxp as number)
-            .setRequiredXP(Number(reqXp))
-            .setLevel(Number(level))
+            .setCurrentXP(currentxp)
+            .setRequiredXP(reqXp)
+            .setLevel(level)
             .setStatus(status as status)
             .setProgressBar(barcolor as string, "COLOR")
             .setUsername(name as string)
@@ -125,7 +125,7 @@ export default async (req: Request, res: Response): Promise<any> => {
         if (bgColor) card.setBackground("COLOR", bgColor as string);
 
         // Rank
-        if (rank) card.setRank(Number(rank));
+        if (!isNaN(rank)) card.setRank(rank);
         else card.setRank(1, "Rank", false);
 
         const buffer = await card.build();

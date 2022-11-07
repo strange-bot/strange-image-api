@@ -33,7 +33,7 @@ export default async (req: Request, res: Response): Promise<any> => {
     try {
         const { image, level } = req.query;
         if (!image) return ResponseUtil.missingParams(res, "image");
-        if (isNaN(Number(level))) return ResponseUtil.badRequest(res, "level must be a number");
+        if (level && isNaN(Number(level))) return ResponseUtil.badRequest(res, "level must be a number");
         const buffer = await Canvacord.sharpen(image as string, Number(level));
         return ResponseUtil.success(res, buffer);
     } catch (ex) {
