@@ -10,6 +10,7 @@ COPY package.json yarn.lock ./
 RUN yarn install --production
 
 # Copy app files
+COPY public ./public
 COPY assets ./assets
 COPY dist ./dist
 
