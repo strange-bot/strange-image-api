@@ -6,7 +6,11 @@ export default class RoleHandler {
 
     constructor(client: BotClient) {
         this.client = client;
-        this.client.on("ready", () => this.init());
+        this.client.once("ready", () => this.init());
+        this.client.on("guildMemberAdd", (member) => {
+            if (member.user.bot) return;
+            User.getAllUsers().find((u) => u.discord_id === member.id) && this.addRole(member.id);
+        });
     }
 
     private async init() {

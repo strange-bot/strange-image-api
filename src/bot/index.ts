@@ -1,4 +1,4 @@
-import { Client } from "discord.js";
+import { Client, GatewayIntentBits } from "discord.js";
 import { readdirSync } from "fs";
 import { join } from "path";
 import { Command } from "../../typings";
@@ -10,7 +10,7 @@ export default class BotClient extends Client {
     public roleHandler: RoleHandler;
 
     constructor() {
-        super({ intents: [] });
+        super({ intents: [GatewayIntentBits.GuildMembers] });
         this.commands = new Map();
         this.roleHandler = new RoleHandler(this);
     }
