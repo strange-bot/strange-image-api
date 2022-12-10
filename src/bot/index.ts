@@ -2,14 +2,17 @@ import { Client } from "discord.js";
 import { readdirSync } from "fs";
 import { join } from "path";
 import { Command } from "../../typings";
+import RoleHandler from "./helpers/roleHandler";
 import updatePresence from "./helpers/updatePresence";
 
 export default class BotClient extends Client {
     public commands: Map<string, Command>;
+    public roleHandler: RoleHandler;
 
     constructor() {
         super({ intents: [] });
         this.commands = new Map();
+        this.roleHandler = new RoleHandler(this);
     }
 
     public async init() {
@@ -42,7 +45,9 @@ export default class BotClient extends Client {
     }
 
     private loadCommands() {
-        const commandFiles = readdirSync(join(__dirname, "commands")).filter((file) => file.endsWith(".ts") || file.endsWith(".js"));
+        const commandFiles = readdirSync(join(__dirname, "commands")).filter(
+            (file) => file.endsWith(".ts") || file.endsWith(".js")
+        );
         for (const file of commandFiles) {
             let CmdClass = require(`./commands/${file}`);
             if (CmdClass.default) CmdClass = CmdClass.default;

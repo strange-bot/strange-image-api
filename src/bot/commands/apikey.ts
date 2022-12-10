@@ -47,6 +47,7 @@ export default class ApiKey implements Command {
                 return "You already have an API key.\nType `/apikey regenerate` to regenerate it.";
             }
             const newApiKey = await User.createOrRegenerate(interaction.user.id, interaction.user.tag);
+            await interaction.client.roleHandler.addRole(interaction.user.id);
             return "Your API key is ```" + newApiKey + "```";
         }
 

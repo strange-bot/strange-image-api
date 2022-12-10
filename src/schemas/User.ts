@@ -83,4 +83,8 @@ export default {
     getCacheSize(): number {
         return cache.size;
     },
+
+    getAllUsers(): IUser[] {
+        return Array.from(cache.values());
+    },
 };
