@@ -10,7 +10,9 @@ export default class BotClient extends Client {
     public roleHandler: RoleHandler;
 
     constructor() {
-        super({ intents: [GatewayIntentBits.GuildMembers] });
+        super({
+            intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers],
+        });
         this.commands = new Map();
         this.roleHandler = new RoleHandler(this);
     }

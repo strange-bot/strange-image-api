@@ -1,4 +1,5 @@
 import { ApplicationCommandOptionData, ChatInputCommandInteraction } from "discord.js";
+import RoleHandler from "../src/bot/helpers/roleHandler";
 
 export interface Controller {
     path: string;
@@ -23,5 +24,12 @@ declare global {
              */
             rateLimit: rateLimit.RateLimitInfo;
         }
+    }
+}
+
+declare module "discord.js" {
+    interface Client {
+        commands: Map<string, Command>;
+        roleHandler: RoleHandler;
     }
 }
