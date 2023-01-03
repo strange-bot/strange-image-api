@@ -12,7 +12,7 @@ export default class HomeController implements Controller {
     }
 
     private initializeRoutes(): void {
-        this.router.use("/", express.static("public"));
+        this.router.use(this.path, express.static("public"));
         this.router.get("/discord", (_req, res) => {
             res.redirect("https://discord.gg/jAQg6xs8vu");
         });

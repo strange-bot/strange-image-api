@@ -5,6 +5,7 @@ import { Controller } from "../typings";
 import helmet from "helmet";
 import cors from "cors";
 import rateLimit from "express-rate-limit";
+import session from "express-session"
 
 // custom middlewares
 import errorMiddleware from "./middlewares/error.middleware";
@@ -33,6 +34,13 @@ export default class App {
         this.app.use(express.json());
         this.app.use(express.urlencoded({ extended: true }));
         this.app.use(cors());
+        this.app.use(session({
+            secret: process.env.SESSION_SECRET as string,
+            cookie: { maxAge: 336 * 60 * 60 * 1000 },
+            name: "strange_api_cookie",
+            resave: false,
+            saveUninitialized: false,
+        }));
         this.app.use(
             helmet({
                 contentSecurityPolicy: false, // swagger-ui
