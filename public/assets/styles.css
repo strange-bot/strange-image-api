@@ -1,0 +1,52 @@
+body,
+html {
+    height: 100%;
+}
+
+/* 
+    Index Page CSS
+*/
+
+.feature {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 3rem;
+    width: 3rem;
+    font-size: 1.5rem;
+}
+
+.bg-featured-blog {
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 15rem;
+}
+
+/* 
+    Dashboard CSS
+*/
+
+.log-out-button:hover {
+    color: red !important;
+}
+
+.api-key-box {
+    border-color: #fff !important;
+    border-width: 1px !important;
+    background-color: #ccc;
+}
+
+.form-control {
+    background-color: #212529 !important;
+    color: #fff !important;
+    border-color: #fff !important;
+}
+
+.api-key-button {
+    margin-left: 2px;
+    margin-right: 2px;
+    box-shadow: 3px 9px 20px rgb(0 0 0 / 25%) !important;
+}

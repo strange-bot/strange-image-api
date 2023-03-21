@@ -21,8 +21,11 @@ export default class DashboardController implements Controller {
             if (endpoint.includes("index")) {
                 this.router.get(this.path, file);
             } else {
-                this.router.get(`${this.path}/${endpoint.split(".")[0]}`, file);
+                this.router.get(`${this.path}${endpoint.split(".")[0]}`, file);
             }
         }
+        this.router.get("/discord", (_req, res) => {
+            res.redirect("https://discord.gg/jAQg6xs8vu");
+        });
     }
 }
