@@ -1,21 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="Image Manipulation API" />
-        <meta name="author" content="Sai Teja Madha" />
-        <title>Strange API - Dashboard</title>
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-            crossorigin="anonymous"
-        />
-        <link href="assets/styles.css" rel="stylesheet" />
-    </head>
+    <%- include("partials/head") %>
+
     <body class="d-flex flex-column h-100 bg-dark">
         <main class="flex-shrink-0">
             <!-- Navigation-->
@@ -72,6 +58,7 @@
                                     <div class="col-md-12">
                                         <input
                                             disabled
+                                            style="display: block"
                                             type="text"
                                             id="apikeyhide"
                                             class="form-control api-key-box"
@@ -90,7 +77,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="mt-2 text-center align-items-center justify-content-center">
+                            <div class="py-2 text-center align-items-center justify-content-center">
                                 <button onclick="generateApiKey()" class="btn btn-primary api-key-button" type="button">
                                     <i class="<%= apiKey ? 'fas fa-sync-alt' : 'fas fa-key' %>"></i>
                                     <span><%= apiKey ? "Regenerate" : "Generate" %></span>
@@ -99,9 +86,14 @@
                                     <i class="fas fa-copy"></i>
                                     <span>Copy</span>
                                 </button>
-                                <button onclick="showApiKey()" class="btn btn-primary api-key-button" type="button">
+                                <button
+                                    onclick="showApiKey()"
+                                    id="showBtn"
+                                    class="btn btn-primary api-key-button"
+                                    type="button"
+                                >
                                     <i class="fas fa-eye"></i>
-                                    <span>View</span>
+                                    <span>Show</span>
                                 </button>
                             </div>
                         </div>
@@ -111,25 +103,9 @@
         </main>
 
         <!-- Footer-->
-        <footer class="bg-dark py-4 mt-auto">
-            <div class="container px-5">
-                <div class="row align-items-center justify-content-between flex-column flex-sm-row">
-                    <div class="col-auto">
-                        <div class="small m-0 text-white">Copyright &copy; Strange API 2022</div>
-                    </div>
-                    <div class="col-auto">
-                        <a class="link-light small" href="#!">Privacy</a>
-                        <span class="text-white mx-1">&middot;</span>
-                        <a class="link-light small" href="#!">Terms</a>
-                        <span class="text-white mx-1">&middot;</span>
-                        <a class="link-light small" href="#!">Contact</a>
-                    </div>
-                </div>
-            </div>
-        </footer>
+        <%- include ("partials/footer") %>
 
         <script src="assets/scripts.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <link
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"

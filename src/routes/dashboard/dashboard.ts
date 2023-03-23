@@ -7,6 +7,7 @@ export default async (req: Request, res: Response): Promise<any> => {
     }
     const apiKey = User.getToken(req.session.user.id);
     return res.render("dashboard", {
+        title: "Dashboard",
         username: req.session.user.username + "#" + req.session.user.discriminator,
         avatar: `https://cdn.discordapp.com/avatars/${req.session.user.id}/${req.session.user.avatar}.webp?size=256`,
         apiKey,
