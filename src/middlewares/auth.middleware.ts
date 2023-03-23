@@ -28,7 +28,12 @@ export default async function authMiddleware(req: Request, res: Response, next: 
         if (!user) return ResponseUtil.unauthorized(res, true);
         if (user.token !== token) return ResponseUtil.unauthorized(res, true);
 
-        const ip = ((req.headers["cf-connecting-ip"] || req.headers["x-forwarded-for"] || req.socket.remoteAddress || "") as string)
+        const ip = (
+            (req.headers["cf-connecting-ip"] ||
+                req.headers["x-forwarded-for"] ||
+                req.socket.remoteAddress ||
+                "") as string
+        )
             .split(",")[0]
             .trim();
 
@@ -44,7 +49,15 @@ export default async function authMiddleware(req: Request, res: Response, next: 
             endpoint: req.path,
             headers: Object.fromEntries(
                 Object.entries(req.headers).filter(
-                    ([key]) => ["cf-connecting-ip", "cf-ipcountry", "cf-ray", "user-agent", "x-forwarded-for", "x-real-ip"].includes(key) // only log these headers
+                    ([key]) =>
+                        [
+                            "cf-connecting-ip",
+                            "cf-ipcountry",
+                            "cf-ray",
+                            "user-agent",
+                            "x-forwarded-for",
+                            "x-real-ip",
+                        ].includes(key) // only log these headers
                 )
             ),
             query_params: Object.fromEntries(Object.entries(req.query).filter(([key]) => !["apiKey"].includes(key))), // filter apiKey

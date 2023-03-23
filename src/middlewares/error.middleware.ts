@@ -7,7 +7,8 @@ export default function errorMiddleware(error: HttpException, _req: Request, res
     res.status(status).send({
         success: false,
         code: status,
-        message: "500 Internal Error, Something was error on our side and this should not happen! Please try again later.",
+        message:
+            "500 Internal Error, Something was error on our side and this should not happen! Please try again later.",
     });
     next();
 }

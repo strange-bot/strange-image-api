@@ -3,7 +3,8 @@ import User from "../../schemas/User";
 
 export default (client: Client) => {
     const update = () => {
-        const activity = process.env.AUTHENTICATION === "1" ? `requests from ${User.getCacheSize()} users` : "api requests";
+        const activity =
+            process.env.AUTHENTICATION === "1" ? `requests from ${User.getCacheSize()} users` : "api requests";
         client.user?.setPresence({
             afk: false,
             status: "online",

@@ -17,6 +17,9 @@ export default class Util {
     static generateToken(data: string = ""): string {
         const HMAC = crypto.createHmac("SHA256", crypto.randomBytes(32));
         HMAC.update(`${Date.now()}:${data}:${Date.now()}`);
-        return HMAC.digest("base64").replace(new RegExp("=", "g"), "").replace(new RegExp("/", "g"), "").replace(new RegExp("[+]", "g"), "");
+        return HMAC.digest("base64")
+            .replace(new RegExp("=", "g"), "")
+            .replace(new RegExp("/", "g"), "")
+            .replace(new RegExp("[+]", "g"), "");
     }
 }

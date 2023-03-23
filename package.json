@@ -7,7 +7,8 @@
         "start": "node .",
         "dev": "ts-node src/server.ts",
         "dev:watch": "nodemon --watch \"src/**\" --ext \"ts,json\" --ignore \"src/**/*.spec.ts\" --exec \"ts-node src/server.ts\"",
-        "build": "rimraf ./dist && tsc"
+        "build": "rimraf ./dist && tsc",
+        "format": "prettier --write \"src/**/*.{ts,js,json}\""
     },
     "author": "Sai Teja M",
     "license": "ISC",
@@ -38,6 +39,7 @@
         "@types/swagger-jsdoc": "^6.0.1",
         "@types/swagger-ui-express": "^4.1.3",
         "nodemon": "^2.0.22",
+        "prettier": "^2.8.6",
         "rimraf": "^4.4.1",
         "ts-node": "^10.9.1",
         "typescript": "^5.0.2"
@@ -50,5 +52,12 @@
         "image-manipulation",
         "image-generation",
         "discord-bot"
-    ]
+    ],
+    "prettier": {
+        "singleQuote": false,
+        "printWidth": 120,
+        "tabWidth": 4,
+        "useTabs": false,
+        "endOfLine": "crlf"
+    }
 }
