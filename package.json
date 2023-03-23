@@ -8,6 +8,7 @@
         "dev": "ts-node src/server.ts",
         "dev:watch": "nodemon --watch \"src/**\" --ext \"ts,json\" --ignore \"src/**/*.spec.ts\" --exec \"ts-node src/server.ts\"",
         "build": "rimraf ./dist && tsc",
+        "package": "npm run build && tar -cf strange-api.tar assets dist public views Dockerfile package.json yarn.lock",
         "format": "prettier --write \"src/**/*.{ts,js,json}\""
     },
     "author": "Sai Teja M",
@@ -36,11 +37,13 @@
         "@types/express": "^4.17.17",
         "@types/express-session": "^1.17.7",
         "@types/node": "^18.15.5",
+        "@types/node-fetch": "^2.6.2",
         "@types/swagger-jsdoc": "^6.0.1",
         "@types/swagger-ui-express": "^4.1.3",
         "nodemon": "^2.0.22",
         "prettier": "^2.8.6",
         "rimraf": "^4.4.1",
+        "tar": "^6.1.13",
         "ts-node": "^10.9.1",
         "typescript": "^5.0.2"
     },
