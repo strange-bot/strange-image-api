@@ -9,7 +9,8 @@
         "dev:watch": "nodemon --watch \"src/**\" --ext \"ts,json\" --ignore \"src/**/*.spec.ts\" --exec \"ts-node src/server.ts\"",
         "build": "rimraf ./dist && tsc",
         "package": "npm run build && tar -cf strange-api.tar assets dist public views Dockerfile package.json yarn.lock",
-        "format": "prettier --write \"src/**/*.{ts,js,json}\""
+        "format": "prettier --write \"src/**/*.{ts,js,json}\"",
+        "clean:install": "rimraf node_modules && yarn install"
     },
     "author": "Sai Teja M",
     "license": "ISC",
