@@ -3,10 +3,7 @@ import User from "../../schemas/User";
 
 export default async (req: Request, res: Response): Promise<any> => {
     if (!req.session.user) {
-        return res.status(401).json({
-            error: "Unauthorized",
-            message: "You are not logged in.",
-        });
+        return res.redirect(`/login`);
     }
 
     let reGen = false;
