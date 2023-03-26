@@ -4,10 +4,10 @@ import ResponseUtil from "../../utils/ResponseUtil";
 
 /**
  * @swagger
- * /utils/mirror:
+ * /generators/mirror:
  *   get:
  *     summary: Generates a mirror image
- *     tags: [Utils]
+ *     tags: [Generators]
  *     parameters:
  *       - in: query
  *         name: image
@@ -25,9 +25,9 @@ import ResponseUtil from "../../utils/ResponseUtil";
 
 export default async (req: Request, res: Response): Promise<any> => {
     try {
-        const { code } = req.query;
-        if (!code) return ResponseUtil.missingParams(res, "code");
-        const buffer = await new Mirror().getImage(code as string);
+        const { image } = req.query;
+        if (!image) return ResponseUtil.missingParams(res, "image");
+        const buffer = await new Mirror().getImage(image as string);
         return ResponseUtil.success(res, buffer);
     } catch (ex) {
         return ResponseUtil.serverError(res, ex as Error);
