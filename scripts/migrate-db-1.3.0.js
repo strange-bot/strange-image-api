@@ -9,7 +9,7 @@ async function migration() {
     // Get all collections
     const collections = await mongoose.connection.db.collections();
     try {
-        const usageLogs = collections.find((c) => c.collectionName === "logs");
+        const usageLogs = collections.find((c) => c.collectionName === "usage-logs");
         if (!usageLogs) {
             return console.log("🔎 Usage logs collection not found");
         }
