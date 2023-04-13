@@ -4,30 +4,29 @@
     "description": "Image Manipulation/Generation API",
     "main": "dist/src/server.js",
     "scripts": {
-        "start": "node .",
+        "clean:install": "rimraf ./node_modules && yarn install",
         "dev": "ts-node src/server.ts",
-        "dev:watch": "nodemon --watch \"src/**\" --ext \"ts,json\" --ignore \"src/**/*.spec.ts\" --exec \"ts-node src/server.ts\"",
+        "dev:watch": "nodemon --watch \"src/**\" --ext \"ts,json\" --ignore \"src/**/*.spec.ts\" --exec yarn run dev",
         "build": "rimraf ./dist && tsc",
-        "package": "npm run build && tar -cf strange-api.tar assets dist public views Dockerfile package.json yarn.lock",
-        "format": "prettier --write \"src/**/*.{ts,js,json}\"",
-        "clean:install": "rimraf node_modules && yarn install"
+        "package": "yarn run build && tar -cf strange-api.tar assets dist public views Dockerfile package.json yarn.lock",
+        "format": "prettier --write \"src/**/*.{ts,js,json}\""
     },
     "author": "Sai Teja M",
     "license": "ISC",
     "dependencies": {
         "btoa": "^1.2.1",
         "canvacord": "^5.4.8",
-        "canvas": "^2.11.0",
+        "canvas": "^2.11.2",
         "canvas-constructor": "^4.1.0",
         "cors": "^2.8.5",
         "discord-image-generation": "^1.4.25",
-        "discord.js": "^14.8.0",
+        "discord.js": "^14.9.0",
         "dotenv": "^16.0.3",
         "ejs": "^3.1.9",
         "express": "^4.18.2",
         "express-rate-limit": "^6.7.0",
         "express-session": "^1.17.3",
-        "helmet": "^6.0.1",
+        "helmet": "^6.1.5",
         "mongoose": "^7.0.3",
         "swagger-jsdoc": "^6.2.8",
         "swagger-ui-express": "^4.6.2"
@@ -37,8 +36,8 @@
         "@types/cors": "^2.8.13",
         "@types/express": "^4.17.17",
         "@types/express-session": "^1.17.7",
-        "@types/node": "^18.15.9",
-        "@types/node-fetch": "^2.6.2",
+        "@types/node": "^18.15.11",
+        "@types/node-fetch": "^2.6.3",
         "@types/swagger-jsdoc": "^6.0.1",
         "@types/swagger-ui-express": "^4.1.3",
         "nodemon": "^2.0.22",
@@ -46,7 +45,7 @@
         "rimraf": "^4.4.1",
         "tar": "^6.1.13",
         "ts-node": "^10.9.1",
-        "typescript": "^5.0.2"
+        "typescript": "^5.0.4"
     },
     "keywords": [
         "api",
