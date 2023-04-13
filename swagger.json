@@ -3,7 +3,7 @@
     "info": {
         "version": "1.0.0",
         "title": "Strange API",
-        "description": "Image manipulation made easy.\nThis API requires you to have an API Key which you can get for free by joining our [discord server](https://discord.gg/jAQg6xs8vu)",
+        "description": "Image manipulation made easy.\nThis API requires you to have an API Key which you can get for free by logging into the [dashboard](/dashboard) by joining our [discord server](https://discord.gg/jAQg6xs8vu)",
         "license": {
             "name": "MIT",
             "url": "https://opensource.org/licenses/MIT"

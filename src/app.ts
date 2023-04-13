@@ -5,6 +5,7 @@ import { Controller } from "../typings";
 import helmet from "helmet";
 import cors from "cors";
 import rateLimit from "express-rate-limit";
+import session from "express-session";
 
 // custom middlewares
 import errorMiddleware from "./middlewares/error.middleware";
@@ -15,6 +16,7 @@ export default class App {
     constructor(controllers: Controller[]) {
         this.app = express();
         this.initializeMiddlewares();
+        this.initializeViewEngine();
         this.initializeControllers(controllers);
         this.initializeErrorHandling();
     }
@@ -34,6 +36,15 @@ export default class App {
         this.app.use(express.urlencoded({ extended: true }));
         this.app.use(cors());
         this.app.use(
+            session({
+                secret: process.env.SESSION_SECRET as string,
+                cookie: { maxAge: 336 * 60 * 60 * 1000 },
+                name: "strange_api_cookie",
+                resave: false,
+                saveUninitialized: false,
+            })
+        );
+        this.app.use(
             helmet({
                 contentSecurityPolicy: false, // swagger-ui
             })
@@ -52,11 +63,22 @@ export default class App {
                 standardHeaders: true,
                 legacyHeaders: true,
                 keyGenerator: (req, _res) =>
-                    ((req.headers["cf-connecting-ip"] || req.headers["x-forwarded-for"] || req.socket.remoteAddress || req.ip) as string)
+                    (
+                        (req.headers["cf-connecting-ip"] ||
+                            req.headers["x-forwarded-for"] ||
+                            req.socket.remoteAddress ||
+                            req.ip) as string
+                    )
                         .split(",")[0]
                         .trim(),
             })
         );
+    }
+
+    private initializeViewEngine() {
+        this.app.use(express.static("public")); //Serves resources from public folder
+        this.app.set("view engine", "ejs");
+        this.app.set("views", "views");
     }
 
     private initializeErrorHandling() {

@@ -1,7 +1,13 @@
 import { CanvasRenderingContext2D, Image } from "canvas";
 
 export default class CanvasUtil {
-    static greyscale(ctx: CanvasRenderingContext2D, x: number, y: number, width: number, height: number): CanvasRenderingContext2D {
+    static greyscale(
+        ctx: CanvasRenderingContext2D,
+        x: number,
+        y: number,
+        width: number,
+        height: number
+    ): CanvasRenderingContext2D {
         const data = ctx.getImageData(x, y, width, height);
         for (let i = 0; i < data.data.length; i += 4) {
             const brightness = 0.34 * data.data[i] + 0.5 * data.data[i + 1] + 0.16 * data.data[i + 2];
@@ -13,7 +19,13 @@ export default class CanvasUtil {
         return ctx;
     }
 
-    static invert(ctx: CanvasRenderingContext2D, x: number, y: number, width: number, height: number): CanvasRenderingContext2D {
+    static invert(
+        ctx: CanvasRenderingContext2D,
+        x: number,
+        y: number,
+        width: number,
+        height: number
+    ): CanvasRenderingContext2D {
         const data = ctx.getImageData(x, y, width, height);
         for (let i = 0; i < data.data.length; i += 4) {
             data.data[i] = 255 - data.data[i];
@@ -24,7 +36,13 @@ export default class CanvasUtil {
         return ctx;
     }
 
-    static silhouette(ctx: CanvasRenderingContext2D, x: number, y: number, width: number, height: number): CanvasRenderingContext2D {
+    static silhouette(
+        ctx: CanvasRenderingContext2D,
+        x: number,
+        y: number,
+        width: number,
+        height: number
+    ): CanvasRenderingContext2D {
         const data = ctx.getImageData(x, y, width, height);
         for (let i = 0; i < data.data.length; i += 4) {
             data.data[i] = 0;
@@ -35,7 +53,13 @@ export default class CanvasUtil {
         return ctx;
     }
 
-    static sepia(ctx: CanvasRenderingContext2D, x: number, y: number, width: number, height: number): CanvasRenderingContext2D {
+    static sepia(
+        ctx: CanvasRenderingContext2D,
+        x: number,
+        y: number,
+        width: number,
+        height: number
+    ): CanvasRenderingContext2D {
         const data = ctx.getImageData(x, y, width, height);
         for (let i = 0; i < data.data.length; i += 4) {
             const brightness = 0.34 * data.data[i] + 0.5 * data.data[i + 1] + 0.16 * data.data[i + 2];
@@ -47,7 +71,13 @@ export default class CanvasUtil {
         return ctx;
     }
 
-    static contrast(ctx: CanvasRenderingContext2D, x: number, y: number, width: number, height: number): CanvasRenderingContext2D {
+    static contrast(
+        ctx: CanvasRenderingContext2D,
+        x: number,
+        y: number,
+        width: number,
+        height: number
+    ): CanvasRenderingContext2D {
         const data = ctx.getImageData(x, y, width, height);
         const factor = 259 / 100 + 1;
         const intercept = 128 * (1 - factor);
@@ -87,7 +117,15 @@ export default class CanvasUtil {
         return ctx;
     }
 
-    static drawImageWithTint(ctx: CanvasRenderingContext2D, image: Image, color: string, x: number, y: number, width: number, height: number): void {
+    static drawImageWithTint(
+        ctx: CanvasRenderingContext2D,
+        image: Image,
+        color: string,
+        x: number,
+        y: number,
+        width: number,
+        height: number
+    ): void {
         const { fillStyle, globalAlpha } = ctx;
         ctx.fillStyle = color;
         ctx.drawImage(image, x, y, width, height);

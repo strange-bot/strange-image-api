@@ -12,6 +12,7 @@ RUN yarn install --production
 # Copy app files
 COPY public ./public
 COPY assets ./assets
+COPY views ./views
 COPY dist ./dist
 
 # Environment variables

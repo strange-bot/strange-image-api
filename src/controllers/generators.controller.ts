@@ -3,6 +3,7 @@ import { join } from "path";
 import { readdirSync } from "fs";
 import { Controller } from "../../typings";
 import authMiddleware from "../middlewares/auth.middleware";
+import loggerMiddleware from "../middlewares/logger.middleware";
 
 export default class GeneratorsController implements Controller {
     public path: string;
@@ -19,7 +20,7 @@ export default class GeneratorsController implements Controller {
         for (const endpoint of routesDir) {
             let file = require(`../routes/generators/${endpoint}`);
             if (file.default) file = file.default;
-            this.router.get(`${this.path}/${endpoint.split(".")[0]}`, authMiddleware, file);
+            this.router.get(`${this.path}/${endpoint.split(".")[0]}`, authMiddleware, loggerMiddleware, file);
         }
     }
 }

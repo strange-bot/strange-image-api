@@ -4,10 +4,12 @@ import { Command } from "../../../typings";
 export default class Ping implements Command {
     public name: string;
     public description: string;
+    public ephemeral: boolean;
 
     constructor() {
         this.name = "ping";
         this.description = "Pong!";
+        this.ephemeral = true;
     }
 
     public async callback(interaction: ChatInputCommandInteraction) {

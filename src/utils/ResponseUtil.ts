@@ -46,7 +46,8 @@ export default class ResponseUtil {
         return res.status(500).json({
             success: false,
             code: 500,
-            message: "500 Internal Error, Something was error on our side and this should not happen! Please try again later.",
+            message:
+                "500 Internal Error, Something was error on our side and this should not happen! Please try again later.",
         });
     }
 }

@@ -1,4 +1,5 @@
 import { ApplicationCommandOptionData, ChatInputCommandInteraction } from "discord.js";
+import session from "express-session";
 import RoleHandler from "../src/bot/helpers/roleHandler";
 
 export interface Controller {
@@ -31,5 +32,30 @@ declare module "discord.js" {
     interface Client {
         commands: Map<string, Command>;
         roleHandler: RoleHandler;
+    }
+}
+
+interface UserData {
+    id: string;
+    username: string;
+    discriminator: string;
+    avatar?: string;
+    bot?: boolean;
+    system?: boolean;
+    mfa_enabled?: boolean;
+    banner?: string;
+    accent_color?: number;
+    locale?: string;
+    verified?: boolean;
+    email?: string;
+    flags?: number;
+    premium_type?: number;
+    public_flags?: number;
+}
+
+declare module "express-session" {
+    export interface SessionData {
+        userId: string;
+        user: UserData | null;
     }
 }

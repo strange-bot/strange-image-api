@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { log } from "../bot/helpers/webHook";
 import Util from "../utils/Util";
 
 interface IUser {
@@ -39,12 +40,14 @@ export default {
     async createOrRegenerate(discordId: string, username: string): Promise<string> {
         await mongoose.connect(process.env.MONGO_URL as string);
         const token = Util.generateToken(discordId);
+        let created = false;
 
         let user = await User.findOne({ discord_id: discordId });
         if (user) {
             user.token = token;
             await user.save();
         } else {
+            created = true;
             user = new User({
                 discord_id: discordId,
                 username,
@@ -55,6 +58,7 @@ export default {
 
         cache.set(user._id.toString(), user.toJSON());
         const EncodedUserID = Buffer.from(user._id.toString()).toString("base64");
+        log(`Token ${created ? "created" : "regenerated"}`, `**Discord ID:** ${discordId}\n**Username:** ${username}`);
         return `${EncodedUserID}.${user.token}`;
     },
 
@@ -75,6 +79,7 @@ export default {
             if (user.discord_id === discordId) {
                 await User.updateOne({ discord_id: discordId }, { token: null });
                 cache.delete(discordId);
+                log("Token deleted", `**Discord ID:** ${discordId}\n**Username:** ${user.username}`);
                 break;
             }
         }

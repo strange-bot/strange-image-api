@@ -7,7 +7,7 @@ import App from "./app";
 import DiscordBot from "./bot";
 
 // controllers
-import HomeController from "./controllers/home.controller";
+import DashboardController from "./controllers/dashboard.controller";
 import DocsController from "./controllers/docs.controller";
 import DebugController from "./controllers/debug.controller";
 import FilterController from "./controllers/filters.controller";
@@ -15,9 +15,10 @@ import GeneratorsController from "./controllers/generators.controller";
 import OverlaysController from "./controllers/overlays.controller";
 import UtilsController from "./controllers/utils.controller";
 import User from "./schemas/User";
+import { logError } from "./bot/helpers/webHook";
 
 const app = new App([
-    new HomeController("/"),
+    new DashboardController("/"),
     new DocsController("/docs"),
     new DebugController("/api/debug"),
     new FilterController("/api/filters"),
@@ -34,5 +35,14 @@ async function init() {
 
 init();
 
+// log uncaught exceptions
+process.on("uncaughtException", (err) => {
+    logError("uncaughtException", err);
+    console.log(err);
+});
+
 // log unhandled rejections
-process.on("unhandledRejection", (err) => console.log(err));
+process.on("unhandledRejection", (err) => {
+    logError("unhandledRejection", err as Error);
+    console.log(err);
+});
