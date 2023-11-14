@@ -48,7 +48,7 @@ export default class BotClient extends Client {
 
     private loadCommands() {
         const commandFiles = readdirSync(join(__dirname, "commands")).filter(
-            (file) => file.endsWith(".ts") || file.endsWith(".js")
+            (file) => file.endsWith(".ts") || file.endsWith(".js"),
         );
         for (const file of commandFiles) {
             let CmdClass = require(`./commands/${file}`);

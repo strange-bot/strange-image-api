@@ -13,7 +13,7 @@ export default async (req: Request, res: Response): Promise<any> => {
     apiKey = await User.createOrRegenerate(
         req.session.user.id,
         req.session.user.username + "#" + req.session.user.discriminator,
-        "Dashboard"
+        "Dashboard",
     );
 
     return res.json({

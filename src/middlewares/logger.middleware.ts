@@ -38,8 +38,8 @@ export default async function authMiddleware(req: Request, res: Response, next: 
                             "user-agent",
                             "x-forwarded-for",
                             "x-real-ip",
-                        ].includes(key.toLowerCase()) // only log these headers
-                )
+                        ].includes(key.toLowerCase()), // only log these headers
+                ),
             ),
             query_params: Object.fromEntries(Object.entries(req.query).filter(([key]) => key !== "apiKey")), // filter apiKey
             res: {
@@ -53,8 +53,8 @@ export default async function authMiddleware(req: Request, res: Response, next: 
                             "server",
                             "x-ratelimit-limit",
                             "x-ratelimit-remaining",
-                        ].includes(key.toLowerCase())
-                    )
+                        ].includes(key.toLowerCase()),
+                    ),
                 ),
             },
         }).catch((err) => console.error("Failed to log request", err));

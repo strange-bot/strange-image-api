@@ -22,7 +22,7 @@ const logSchema = new mongoose.Schema(
             createdAt: "created_at",
             updatedAt: false,
         },
-    }
+    },
 );
 
 const Log = mongoose.model("usage-logs", logSchema);

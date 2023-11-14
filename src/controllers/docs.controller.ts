@@ -29,7 +29,7 @@ export default class DocsController implements Controller {
             swaggerUi.serve,
             swaggerUi.setup(swaggerSpec, {
                 customSiteTitle: "Strange API - Docs",
-            })
+            }),
         );
     }
 }

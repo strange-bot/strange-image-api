@@ -42,12 +42,12 @@ export default class App {
                 name: "strange_api_cookie",
                 resave: false,
                 saveUninitialized: false,
-            })
+            }),
         );
         this.app.use(
             helmet({
                 contentSecurityPolicy: false, // swagger-ui
-            })
+            }),
         );
         this.app.use(
             "/api/",
@@ -71,7 +71,7 @@ export default class App {
                     )
                         .split(",")[0]
                         .trim(),
-            })
+            }),
         );
     }
 

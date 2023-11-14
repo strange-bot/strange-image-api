@@ -6,7 +6,7 @@ export default class CanvasUtil {
         x: number,
         y: number,
         width: number,
-        height: number
+        height: number,
     ): CanvasRenderingContext2D {
         const data = ctx.getImageData(x, y, width, height);
         for (let i = 0; i < data.data.length; i += 4) {
@@ -24,7 +24,7 @@ export default class CanvasUtil {
         x: number,
         y: number,
         width: number,
-        height: number
+        height: number,
     ): CanvasRenderingContext2D {
         const data = ctx.getImageData(x, y, width, height);
         for (let i = 0; i < data.data.length; i += 4) {
@@ -41,7 +41,7 @@ export default class CanvasUtil {
         x: number,
         y: number,
         width: number,
-        height: number
+        height: number,
     ): CanvasRenderingContext2D {
         const data = ctx.getImageData(x, y, width, height);
         for (let i = 0; i < data.data.length; i += 4) {
@@ -58,7 +58,7 @@ export default class CanvasUtil {
         x: number,
         y: number,
         width: number,
-        height: number
+        height: number,
     ): CanvasRenderingContext2D {
         const data = ctx.getImageData(x, y, width, height);
         for (let i = 0; i < data.data.length; i += 4) {
@@ -76,7 +76,7 @@ export default class CanvasUtil {
         x: number,
         y: number,
         width: number,
-        height: number
+        height: number,
     ): CanvasRenderingContext2D {
         const data = ctx.getImageData(x, y, width, height);
         const factor = 259 / 100 + 1;
@@ -97,7 +97,7 @@ export default class CanvasUtil {
         y: number,
         width: number,
         height: number,
-        strideLevel = 4
+        strideLevel = 4,
     ): CanvasRenderingContext2D {
         const data = ctx.getImageData(x, y, width, height);
         const temp = ctx.getImageData(x, y, width, height);
@@ -124,7 +124,7 @@ export default class CanvasUtil {
         x: number,
         y: number,
         width: number,
-        height: number
+        height: number,
     ): void {
         const { fillStyle, globalAlpha } = ctx;
         ctx.fillStyle = color;
