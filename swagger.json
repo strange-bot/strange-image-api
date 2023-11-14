@@ -15,7 +15,7 @@
     },
     "servers": [
         {
-            "url": "https://strangeapi.fun/api",
+            "url": "https://strangeapi.hostz.me/api",
             "description": "Production"
         }
     ],
