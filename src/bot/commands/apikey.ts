@@ -46,14 +46,14 @@ export default class ApiKey implements Command {
             if (apiKey) {
                 return "You already have an API key.\nType `/apikey regenerate` to regenerate it.";
             }
-            const newApiKey = await User.createOrRegenerate(interaction.user.id, interaction.user.tag);
+            const newApiKey = await User.createOrRegenerate(interaction.user.id, interaction.user.tag, "Discord");
             await interaction.client.roleHandler.addRole(interaction.user.id);
             return "Your API key is ```" + newApiKey + "```";
         }
 
         // regenerate
         if (sub === "regenerate") {
-            const newApiKey = await User.createOrRegenerate(interaction.user.id, interaction.user.tag);
+            const newApiKey = await User.createOrRegenerate(interaction.user.id, interaction.user.tag, "Discord");
             return "Your API key is ```" + newApiKey + "```";
         }
 

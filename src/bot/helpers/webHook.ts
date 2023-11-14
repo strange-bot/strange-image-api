@@ -2,8 +2,8 @@ import { EmbedBuilder, WebhookClient } from "discord.js";
 
 const webhookLogger = process.env.WEBHOOK_URL
     ? new WebhookClient({
-          url: process.env.WEBHOOK_URL,
-      })
+        url: process.env.WEBHOOK_URL,
+    })
     : null;
 
 export function logError(title: string, err: Error) {

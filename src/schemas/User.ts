@@ -31,13 +31,13 @@ export default {
         await mongoose.connect(process.env.MONGO_URL as string);
         console.log("Connected to MongoDB");
 
-        const users = await User.find({ token: { $ne: null } }).lean();
+        const users: IUser[] = await User.find({ token: { $ne: null } }).lean();
         for (const user of users) cache.set(user._id.toString(), user);
 
         console.log("Cached all users");
     },
 
-    async createOrRegenerate(discordId: string, username: string): Promise<string> {
+    async createOrRegenerate(discordId: string, username: string, src: "Discord" | "Dashboard"): Promise<string> {
         await mongoose.connect(process.env.MONGO_URL as string);
         const token = Util.generateToken(discordId);
         let created = false;
@@ -58,7 +58,10 @@ export default {
 
         cache.set(user._id.toString(), user.toJSON());
         const EncodedUserID = Buffer.from(user._id.toString()).toString("base64");
-        log(`Token ${created ? "created" : "regenerated"}`, `**Discord ID:** ${discordId}\n**Username:** ${username}`);
+        log(
+            `Token ${created ? "created" : "regenerated"}`,
+            `**Discord ID:** ${discordId}\n**Username:** ${username}\n**Source:** ${src}}`
+        );
         return `${EncodedUserID}.${user.token}`;
     },
 

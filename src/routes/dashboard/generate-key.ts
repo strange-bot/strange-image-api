@@ -12,7 +12,8 @@ export default async (req: Request, res: Response): Promise<any> => {
     if (!apiKey) reGen = true;
     apiKey = await User.createOrRegenerate(
         req.session.user.id,
-        req.session.user.username + "#" + req.session.user.discriminator
+        req.session.user.username + "#" + req.session.user.discriminator,
+        "Dashboard"
     );
 
     return res.json({
