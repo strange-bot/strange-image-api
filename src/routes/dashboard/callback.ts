@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import fetch from "node-fetch";
 import btoa from "btoa";
 import util from "util";
+import Logger from "../../utils/Logger";
 
 const wait = util.promisify(setTimeout);
 
@@ -26,7 +27,7 @@ export default async (req: Request, res: Response): Promise<any> => {
     const tokens = (await response.json()) as any;
 
     if (tokens.error || !tokens.access_token) {
-        console.log("Failed to login to dashboard", tokens);
+        Logger.error("Failed to login to dashboard", tokens);
         return res.redirect(`/login`);
     }
 

@@ -1,4 +1,5 @@
 import { Response } from "express";
+import Logger from "./Logger";
 
 export default class ResponseUtil {
     static success(res: Response, buffer: Buffer) {
@@ -42,7 +43,7 @@ export default class ResponseUtil {
     }
 
     static serverError(res: Response, err: Error) {
-        console.log(err);
+        Logger.error("serverError", err);
         return res.status(500).json({
             success: false,
             code: 500,

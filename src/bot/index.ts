@@ -1,9 +1,10 @@
-import { Client, GatewayIntentBits } from "discord.js";
+import { Client, DiscordAPIError, GatewayIntentBits } from "discord.js";
 import { readdirSync } from "fs";
 import { join } from "path";
 import { Command } from "../../typings";
 import RoleHandler from "./helpers/roleHandler";
 import updatePresence from "./helpers/updatePresence";
+import Logger from "../utils/Logger";
 
 export default class BotClient extends Client {
     public commands: Map<string, Command>;
@@ -26,7 +27,7 @@ export default class BotClient extends Client {
     private loadEvents() {
         this.on("ready", async () => {
             if (this.user) {
-                console.log(`Logged in as ${this.user.tag}!`);
+                Logger.info(`Logged in as ${this.user.tag}!`);
                 await this.registerCommands();
                 updatePresence(this);
             }
@@ -40,7 +41,8 @@ export default class BotClient extends Client {
                 const reply = await command.callback(interaction);
                 await interaction.reply({ content: reply, ephemeral: command.ephemeral || false });
             } catch (error: any) {
-                console.log(error);
+                if (error instanceof DiscordAPIError && error.code === 10062) return; // Unknown interaction
+                Logger.error("interactionCreate", error);
                 await interaction.reply("There was an error while executing this command!");
             }
         });
@@ -56,7 +58,7 @@ export default class BotClient extends Client {
             const command = new CmdClass() as Command;
             this.commands.set(command.name, command);
         }
-        console.log(`Loaded ${this.commands.size} commands!`);
+        Logger.info(`Loaded ${this.commands.size} commands!`);
     }
 
     private async registerCommands() {
@@ -73,11 +75,11 @@ export default class BotClient extends Client {
         if (process.env.DISCORD_SERVER_ID) {
             const guild = this.guilds.cache.get(process.env.DISCORD_SERVER_ID);
             if (guild) await guild.commands.set(toRegister);
-            else console.log("Guild not found!");
+            else return Logger.error("registerCommands", new Error("Guild not found!"));
         } else {
             await this.application?.commands.set(toRegister);
         }
 
-        console.log(`Registered ${this.commands.size} commands!`);
+        Logger.info(`Registered ${this.commands.size} commands!`);
     }
 }

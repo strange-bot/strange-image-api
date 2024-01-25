@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import Logger from "../../utils/Logger";
 
 export default async (req: Request, res: Response): Promise<any> => {
     if (!req.session.user) {
@@ -6,7 +7,7 @@ export default async (req: Request, res: Response): Promise<any> => {
     }
     req.session.destroy((err) => {
         if (err) {
-            console.error(err);
+            Logger.error("Failed to destroy session", err);
         }
     });
     res.redirect("/");

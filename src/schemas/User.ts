@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { log } from "../bot/helpers/webHook";
 import Util from "../utils/Util";
+import Logger from "../utils/Logger";
 
 interface IUser {
     _id: mongoose.Types.ObjectId;
@@ -29,12 +30,12 @@ const cache = new Map<string, IUser>();
 export default {
     async init() {
         await mongoose.connect(process.env.MONGO_URL as string);
-        console.log("Connected to MongoDB");
+        Logger.info("Connected to MongoDB");
 
         const users: IUser[] = await User.find({ token: { $ne: null } }).lean();
         for (const user of users) cache.set(user._id.toString(), user);
 
-        console.log("Cached all users");
+        Logger.info("Cached all users");
     },
 
     async createOrRegenerate(discordId: string, username: string, src: "Discord" | "Dashboard"): Promise<string> {

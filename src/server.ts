@@ -15,7 +15,7 @@ import GeneratorsController from "./controllers/generators.controller";
 import OverlaysController from "./controllers/overlays.controller";
 import UtilsController from "./controllers/utils.controller";
 import User from "./schemas/User";
-import { logError } from "./bot/helpers/webHook";
+import Logger from "./utils/Logger";
 
 const app = new App([
     new DashboardController("/"),
@@ -37,12 +37,10 @@ init();
 
 // log uncaught exceptions
 process.on("uncaughtException", (err) => {
-    logError("uncaughtException", err);
-    console.log(err);
+    Logger.error("uncaughtException", err);
 });
 
 // log unhandled rejections
 process.on("unhandledRejection", (err) => {
-    logError("unhandledRejection", err as Error);
-    console.log(err);
+    Logger.error("unhandledRejection", err);
 });

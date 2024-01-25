@@ -1,11 +1,10 @@
 import { Request, Response, NextFunction } from "express";
-import { logError } from "../bot/helpers/webHook";
+import Logger from "../utils/Logger";
 import HttpException from "../exceptions/HttpException";
 
 export default function errorMiddleware(error: HttpException, _req: Request, res: Response, next: NextFunction) {
     const status = error.status || 500;
-    console.log(error);
-    logError("errorMiddleware", error);
+    Logger.error("errorMiddleware", error);
     res.status(status).send({
         success: false,
         code: status,

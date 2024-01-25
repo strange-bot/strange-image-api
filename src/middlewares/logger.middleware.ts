@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import UsageLogs from "../schemas/UsageLogs";
+import Logger from "../utils/Logger";
 
 export default async function authMiddleware(req: Request, res: Response, next: NextFunction) {
     // skip logging localhost
@@ -57,7 +58,7 @@ export default async function authMiddleware(req: Request, res: Response, next: 
                     ),
                 ),
             },
-        }).catch((err) => console.error("Failed to log request", err));
+        }).catch((err) => Logger.error("Failed to log request", err));
         return response;
     };
 

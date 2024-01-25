@@ -1,3 +1,5 @@
+import Logger from "./Logger";
+
 export default function validateEnv(): void {
     if (!process.env.PORT) throw new Error("PORT is not defined");
     else {
@@ -19,5 +21,5 @@ export default function validateEnv(): void {
         }
     }
 
-    console.log("Environment variables validated.");
+    Logger.info("Environment variables validated.");
 }

@@ -1,5 +1,6 @@
 import BotClient from "..";
 import User from "../../schemas/User";
+import Logger from "../../utils/Logger";
 
 export default class RoleHandler {
     private client: BotClient;
@@ -30,7 +31,7 @@ export default class RoleHandler {
             await member.roles.add(role);
             count++;
         }
-        console.log(`[RoleHandler] - Added role to ${count} users`);
+        Logger.info(`[RoleHandler] - Added role to ${count} users`);
     }
 
     public async addRole(userId: string) {
@@ -45,6 +46,6 @@ export default class RoleHandler {
         if (member.roles.cache.has(role.id)) return;
         await member.roles.add(role);
 
-        console.log(`[RoleHandler] - Added role to ${member.user.tag}`);
+        Logger.info(`[RoleHandler] - Added role to ${member.user.tag}`);
     }
 }

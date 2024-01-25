@@ -6,20 +6,20 @@ const webhookLogger = process.env.WEBHOOK_URL
       })
     : null;
 
-export function logError(title: string, err: Error) {
+export function logError(title: string, err: any) {
     if (!webhookLogger) return;
     const embed = new EmbedBuilder().setAuthor({ name: title }).setColor("#ff0000");
 
-    if (err.stack) embed.setDescription("```" + err.stack.slice(0, 4000) + "```");
+    if (err?.stack) embed.setDescription("```" + err.stack.slice(0, 4000) + "```");
 
     embed.addFields([
         {
             name: "Name",
-            value: err.name,
+            value: err.name || "N/A",
         },
         {
             name: "Error",
-            value: err.message,
+            value: err.message || "N/A",
         },
     ]);
 

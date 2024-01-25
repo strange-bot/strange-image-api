@@ -1,5 +1,6 @@
 import express from "express";
 import { Controller } from "../typings";
+import Logger from "./utils/Logger";
 
 // middlewares
 import helmet from "helmet";
@@ -23,7 +24,7 @@ export default class App {
 
     public listen(port: string): void {
         this.app.listen(port, () => {
-            console.log(`App listening on the port ${port}`);
+            Logger.info(`App listening on the port ${port}`);
         });
     }
 
