@@ -1,4 +1,13 @@
-FROM node:16
+FROM node:18-alpine
+
+# Install dependencies for canvas
+RUN apk add --no-cache \
+    build-base \
+    g++ \
+    cairo-dev \
+    jpeg-dev \
+    pango-dev \
+    giflib-dev
 
 # Create app directory
 WORKDIR /usr/src/app
