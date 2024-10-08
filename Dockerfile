@@ -18,9 +18,6 @@ COPY package.json yarn.lock ./
 # Install dependencies
 RUN yarn install --production
 
-# Build the app
-RUN yarn build
-
 # Copy app files
 COPY public ./public
 COPY assets ./assets
